@@ -42,11 +42,11 @@ It takes a blog topic and target audience from Google Sheets, sends it to an AI 
 
 1. Start n8n:
 
-n8n
+   n8n
 
 2. Open in browser:
 
-http://localhost:5678
+  http://localhost:5678
 
 3. Import workflow JSON
 
@@ -88,4 +88,5 @@ Built as part of an AI automation assignment to demonstrate:
 ## 👤 Author
 
 Zalak Rajvanshi
+
 
