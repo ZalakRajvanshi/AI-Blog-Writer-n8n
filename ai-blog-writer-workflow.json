@@ -60,7 +60,8 @@
           "parameters": [
             {
               "name": "Authorization",
-              "value": "Bearer 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"
+              "value": "Bearer YOUR_NEW_API_KEY"
+"
             },
             {
               "name": "Content-Type",
