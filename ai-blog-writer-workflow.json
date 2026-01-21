@@ -19,14 +19,14 @@
           "value": "1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c",
           "mode": "list",
           "cachedResultName": "AI Blog Writer",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit?usp=drivesdk"
+          "cachedResultUrl": "YOUR_SHEET_ID"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit#gid=0"
+          "cachedResultUrl": "YOUR_SHEET_ID"
         },
         "options": {
           "dataLocationOnSheet": {
@@ -46,7 +46,7 @@
       "name": "Get row(s) in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "TUx3FIWogE6de1pE",
+          "id": "",
           "name": "Google Sheets account"
         }
       }
@@ -91,14 +91,14 @@
           "value": "1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c",
           "mode": "list",
           "cachedResultName": "AI Blog Writer",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit?usp=drivesdk"
+          "cachedResultUrl": "YOUR_SHEET_ID"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Sheet1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit#gid=0"
+          "cachedResultUrl": "YOUR_SHEET_ID"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -167,7 +167,7 @@
       "name": "Update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "TUx3FIWogE6de1pE",
+          "id": "",
           "name": "Google Sheets account"
         }
       }
