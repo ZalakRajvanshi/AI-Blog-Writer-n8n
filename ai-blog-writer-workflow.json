@@ -1,0 +1,223 @@
+{
+  "name": "AI Blog Writer",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "80b65c58-55a5-462a-88a9-5556a3ba342a",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c",
+          "mode": "list",
+          "cachedResultName": "AI Blog Writer",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit#gid=0"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "61ee23bb-6079-4f11-abe6-e461b04e955e",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TUx3FIWogE6de1pE",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"mistralai/mistral-7b-instruct\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a professional blog writer for product managers.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a professional blog (800–1200 words).\\n\\nTopic: {{$json.Topic}}\\nTarget Audience: {{$json['Target Audience']}}\\n\\nIMPORTANT FORMATTING RULES:\\n- Do NOT use markdown\\n- Do NOT use ** or * or #\\n- Use plain text only\\n- Write headings like this:\\n  Subheading 1:\\n  Subheading 2:\\n\\nSTRUCTURE:\\n1. Title\\n2. Hook\\n3. Introduction\\n4. 3–4 subheadings with content\\n5. Conclusion\\n6. Takeaway\\n\\nSTYLE:\\n- Professional\\n- Conversational\\n- Clear paragraphs\\n- No emojis\\n- Looks like a real company blog\"\n    }\n  ]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        400,
+        0
+      ],
+      "id": "7ebeba6b-003d-41f2-bf16-97eaabedb8cb",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c",
+          "mode": "list",
+          "cachedResultName": "AI Blog Writer",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1mFXXfoWfIE955mMAnfDtmqwACwbHtt5k6fAtseXaD_c/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{$node[\"Get row(s) in sheet\"].json[\"row_number\"]}}\n",
+            "Generated Blog": "={{$json.choices[0].message.content}}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Topic",
+              "displayName": "Topic",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Target Audience",
+              "displayName": "Target Audience",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Generated Blog",
+              "displayName": "Generated Blog",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        608,
+        0
+      ],
+      "id": "596ddd70-7668-439b-b300-2dda84b8d5d3",
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "TUx3FIWogE6de1pE",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "ac2f3ee9-d4c5-4603-886e-e2a65fc3ff28",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d7b6c41c0552b858f328b3098e4fc3d60c52f3f7290839a23a6d7b44456be97e"
+  },
+  "id": "RqYg5kT0g_s5x8dnfToN2",
+  "tags": []
+}
