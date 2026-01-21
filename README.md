@@ -42,7 +42,7 @@ It takes a blog topic and target audience from Google Sheets, sends it to an AI 
    - Updates same row with output
      
   
-   ## 🔹 How to Run Locally
+## 🔹 How to Run Locally
 
   1. Start n8n:
 
@@ -97,6 +97,7 @@ Built as part of an AI automation assignment to demonstrate:
 ## 👤 Author
 
 Zalak Rajvanshi
+
 
 
 
